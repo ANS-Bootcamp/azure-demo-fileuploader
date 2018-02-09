@@ -30,7 +30,7 @@ $('#upload-input').on('change', function(){
       success: function(data){
           console.log('upload successful!\n' + data);
           $('#myModal').modal('show');
-          $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 50%" >');
+          $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
       },
       xhr: function() {
         // create an XMLHttpRequest
