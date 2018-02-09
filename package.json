@@ -1,0 +1,16 @@
+{
+  "name": "azure-blob-file-upload",
+  "version": "1.0.0",
+  "description": "Node.JS File Uploader to Azure Blob Storage",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "azure-storage": "^2.8.0",
+    "express": "^4.16.2",
+    "multiparty": "^4.1.3"
+  }
+}
