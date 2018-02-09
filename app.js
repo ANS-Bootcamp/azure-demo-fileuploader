@@ -42,9 +42,6 @@ app.post('/upload', function (req, res) {
                         }
                     };
                     
-                    console.log(result.container);
-                    console.log(result.name);
-
                     var sasToken = blobService.generateSharedAccessSignature(result.container, result.name, sharedAccessPolicy);
                     var uri = blobService.getUrl(result.container, result.name, sasToken, true);
 
