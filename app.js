@@ -19,7 +19,7 @@ app.post('/upload', function (req, res) {
       if (part.filename) {
 
           var size = part.byteCount - part.byteOffset;
-          var name = uuidv1();
+          var name = uuidv1() + part.filename.split(".")[1];
 
           blobService.createBlockBlobFromStream('images', name, part, size, function(error, result, response) {
               if (error) {
