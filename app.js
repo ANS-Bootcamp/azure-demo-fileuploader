@@ -20,13 +20,8 @@ app.post('/upload', function (req, res) {
 
           var size = part.byteCount - part.byteOffset;
           var name = uuidv1() + "." + part.filename.split(".")[1].toLowerCase();
-          var options = {
-            contentSettings: {
-                contentType : "image/jpg"
-            }
-          };
 
-          blobService.createBlockBlobFromStream('images', name, part, size, options, function(error, result, response) {
+          blobService.createBlockBlobFromStream('images', name, part, size, function(error, result, response) {
               if (error) {
                   console.log(error);
                   res.send(error);
