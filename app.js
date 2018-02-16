@@ -56,8 +56,4 @@ app.post('/upload', function (req, res) {
   form.parse(req);
 });
 
-//var server = app.listen(80, function(){
-//  console.log('Server listening on port 80');
-//});
-
 module.exports = app;
