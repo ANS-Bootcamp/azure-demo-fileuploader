@@ -3,7 +3,8 @@ var app = express();
 var path = require('path');
 var fs = require('fs');
 var azure = require('azure-storage');
-var multiparty = require('multiparty')
+var multiparty = require('multiparty');
+var uuidv1 = require('uuid/v1');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -18,7 +19,7 @@ app.post('/upload', function (req, res) {
       if (part.filename) {
 
           var size = part.byteCount - part.byteOffset;
-          var name = part.filename;
+          var name = uuidv1();
 
           blobService.createBlockBlobFromStream('images', name, part, size, function(error, result, response) {
               if (error) {
