@@ -1,4 +1,6 @@
+var path;
 $('.upload-btn').on('click', function (){
+    path = '/upload?api=images';
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
@@ -7,7 +9,7 @@ $('.upload-btn').on('click', function (){
 $('#upload-input').on('change', function(){
 
   var files = $(this).get(0).files;
-  
+
   if (files.length > 0){
     // create a FormData object which will be sent as the data payload in the
     // AJAX request
@@ -22,7 +24,7 @@ $('#upload-input').on('change', function(){
     }
 
     $.ajax({
-      url: '/upload',
+      url: path,
       type: 'POST',
       data: formData,
       processData: false,
