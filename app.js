@@ -51,11 +51,15 @@ app.post('/upload', function (req, res) {
 
 
   form.on('close', function() {
+    //Generate image URL
     storageAccount = process.env.AZURE_STORAGE_ACCOUNT;
     uri = "https://"+storageAccount+".blob.core.windows.net/images/"+name;
+
+    //Function to send URL
     function sendUri(){
         res.send(uri);
     };
+    //Delay sending URL for 0.5 seconds to handle blob upload delay.
     setTimeout(sendUri, 500);
   }); 
 
