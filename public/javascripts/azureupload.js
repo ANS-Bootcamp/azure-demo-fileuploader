@@ -31,7 +31,9 @@ $('#upload-input').on('change', function(){
           console.log('upload successful!\n' + data);
           $('#myModal').modal('show');
           $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
+          $('#modal-header').html('<h4>Image uploaded for "Computer Vision" processing...</h4>');
       },
+
       xhr: function() {
         // create an XMLHttpRequest
         var xhr = new XMLHttpRequest();

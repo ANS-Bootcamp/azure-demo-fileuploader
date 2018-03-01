@@ -17,38 +17,40 @@ app.post('/upload', function (req, res) {
   var form = new multiparty.Form();
   form.on('part', function(part) {
       if (part.filename) {
-
           var size = part.byteCount - part.byteOffset;
-          var name = uuidv1() + "." + part.filename.split(".")[1].toLowerCase();
+          var extension = part.filename.split(".")[1].toLowerCase();
+          if(extension == "jpg"){ extension = "jpeg" };
 
-          blobService.createBlockBlobFromStream('images', name, part, size, function(error, result, response) {
-              if (error) {
-                  console.log(error);
-                  res.send(error);
-              }else{
-                    // Create a SAS token that expires in 24 hours
-                    // Set start time to five minutes ago to avoid clock skew.
-                    var startDate = new Date();
-                    startDate.setMinutes(startDate.getMinutes() - 5);
-                    var expiryDate = new Date(startDate);
-                    expiryDate.setMinutes(startDate.getMinutes() + 1440); //24 Hours from now
-
-                    var permissions = permissions || azure.BlobUtilities.SharedAccessPermissions.READ;
-
-                    var sharedAccessPolicy = {
-                        AccessPolicy: {
-                            Permissions: permissions,
-                            Start: startDate,
-                            Expiry: expiryDate
-                        }
+          var name = uuidv1() + "." + extension;
+                blobService.createBlockBlobFromStream('images', name, part, size, function(error, result, response) {
+                    if (error) {
+                        console.log(error);
+                        res.send(error);
+                    }else{
+                          // Create a SAS token that expires in 24 hours
+                          // Set start time to five minutes ago to avoid clock skew.
+                          var startDate = new Date();
+                          startDate.setMinutes(startDate.getMinutes() - 5);
+                          var expiryDate = new Date(startDate);
+                          expiryDate.setMinutes(startDate.getMinutes() + 1440); //24 Hours from now
+      
+                          var permissions = permissions || azure.BlobUtilities.SharedAccessPermissions.READ;
+      
+                          var sharedAccessPolicy = {
+                              AccessPolicy: {
+                                  Permissions: permissions,
+                                  Start: startDate,
+                                  Expiry: expiryDate
+                              }
+                          };
+                          
+                          var sasToken = blobService.generateSharedAccessSignature(result.container, result.name, sharedAccessPolicy);
+                          var uri = blobService.getUrl(result.container, result.name, sasToken, true);
+      
+                          res.send(uri);
                     };
-                    
-                    var sasToken = blobService.generateSharedAccessSignature(result.container, result.name, sharedAccessPolicy);
-                    var uri = blobService.getUrl(result.container, result.name, sasToken, true);
-
-                    res.send(uri);
-              };
-          });
+                });
+   
       } else {
           form.handlePart(part);
       }
