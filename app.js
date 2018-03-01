@@ -24,7 +24,8 @@ app.post('/upload', function (req, res) {
           var options = {contentSettings:{contentType:contentType}}
 
           var name = uuidv1() + "." + extension;
-                blobService.createBlockBlobFromStream('images', name, part, size, options, function(error, result, response) {
+
+              blobService.createBlockBlobFromStream('images', name, part, size, options, function(error, result, response) {
                     if (error) {
                         console.log(error);
                         res.send(error);
@@ -58,6 +59,7 @@ app.post('/upload', function (req, res) {
       }
   });
   form.parse(req);
+  res.send('OK');
 });
 
 module.exports = app;
