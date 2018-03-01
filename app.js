@@ -19,7 +19,7 @@ app.post('/upload', function (req, res) {
       if (part.filename) {
           var size = part.byteCount - part.byteOffset;
           var extension = part.filename.split(".")[1].toLowerCase();
-          if(extension == "jpg"){ extension = "jpeg" };
+          //if(extension == "jpg"){ extension = "jpeg" };
           contentType = "image/"+extension;
           var options = {contentSettings:{contentType:contentType}}
 
