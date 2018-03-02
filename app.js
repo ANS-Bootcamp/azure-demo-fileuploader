@@ -18,7 +18,7 @@ app.post('/upload', function (req, res) {
     var api;
     if(req.query.api){
         api = req.query.api;
-        console.log("Api: "+api);
+        console.log("api: "+api);
     }
     
     var uri;
@@ -56,13 +56,13 @@ app.post('/upload', function (req, res) {
       //Generate image URL
       storageAccount = process.env.AZURE_STORAGE_ACCOUNT;
       uri = "https://"+storageAccount+".blob.core.windows.net/"+api+"/"+name;
-  
+      console.log(uri);
       //Function to send URL
       function sendUri(){
           res.send(uri);
       };
       //Delay sending URL for 0.5 seconds to handle blob upload delay.
-      setTimeout(sendUri, 500);
+      setTimeout(sendUri, 750);
     }); 
       
     form.parse(req);

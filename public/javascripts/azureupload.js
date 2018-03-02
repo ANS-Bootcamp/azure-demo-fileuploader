@@ -1,9 +1,23 @@
-var path;
-$('.upload-btn').on('click', function (){
-    path = '/upload?api=images';
+var api;
+$('.upload-btn-images').on('click', function (){
+  api = 'images';
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
+});
+
+$('.upload-btn-face').on('click', function (){
+  api = 'face';
+  $('#upload-input').click();
+  $('.progress-bar').text('0%');
+  $('.progress-bar').width('0%');
+});
+
+$('.upload-btn-text').on('click', function (){
+  api = 'text';
+  $('#upload-input').click();
+  $('.progress-bar').text('0%');
+  $('.progress-bar').width('0%');
 });
 
 $('#upload-input').on('change', function(){
@@ -24,7 +38,7 @@ $('#upload-input').on('change', function(){
     }
 
     $.ajax({
-      url: path,
+      url: '/upload?api='+api,
       type: 'POST',
       data: formData,
       processData: false,
@@ -32,8 +46,21 @@ $('#upload-input').on('change', function(){
       success: function(data){
           console.log('upload successful!\n' + data);
           $('#myModal').modal('show');
-          $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
-          $('#modal-header').html('<h4>Image uploaded for "Computer Vision" processing...</h4>');
+          if(api == 'images'){
+            document.getElementById("modal-title").innerHTML = "Image Recognition";
+            $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
+            $('#modal-header').html('<h4>Image uploaded for "Computer Vision" image processing...</h4>');
+          };
+          if(api == 'face'){
+            document.getElementById("modal-title").innerHTML = "Face Recognition";
+            $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
+            $('#modal-header').html('<h4>Image uploaded for "Computer Vision" face processing...</h4>');
+          };
+          if(api == 'text'){
+            document.getElementById("modal-title").innerHTML = "Text Recognition";
+            $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
+            $('#modal-header').html('<h4>Image uploaded for "Computer Vision" text processing...</h4>');
+          }
       },
 
       xhr: function() {

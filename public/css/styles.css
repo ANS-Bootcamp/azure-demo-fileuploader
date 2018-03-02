@@ -41,9 +41,18 @@ h4 {
   color: #B8BDC1;
 }
 
-.glyphicon {
-  font-size: 3em;
+.glyphicon:hover,
+.glyphicon:active,
+.glyphicon:focus
+{
+  font-size: 2em;
   color: #52347c;
+}
+
+.glyphicon
+{
+  font-size: 2em;
+  color: #B8BDC1;
 }
 
 h2 {
