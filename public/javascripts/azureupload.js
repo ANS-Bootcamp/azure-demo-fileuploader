@@ -1,6 +1,6 @@
 var api;
-$('.upload-btn-images').on('click', function (){
-  api = 'images';
+$('.upload-btn-image').on('click', function (){
+  api = 'image';
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
@@ -46,7 +46,7 @@ $('#upload-input').on('change', function(){
       success: function(data){
           console.log('upload successful!\n' + data);
           $('#myModal').modal('show');
-          if(api == 'images'){
+          if(api == 'image'){
             document.getElementById("modal-title").innerHTML = "Image Recognition";
             $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
             $('#modal-header').html('<h4>Image uploaded for "Computer Vision" image processing...</h4>');
