@@ -1,4 +1,23 @@
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
+});
+
+$('.nav-tabs a').on('shown.bs.tab', function(event){
+  tabRefresh(String(event.target).split("#")[1]);
+});
+
+$('#myModal').on('hidden.bs.modal', function () {
+  location.reload();
+});
+
 var api;
+
 $('.upload-btn-image').on('click', function (){
   api = 'image';
     $('#upload-input').click();
