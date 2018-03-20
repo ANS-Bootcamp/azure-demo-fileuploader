@@ -6,4 +6,5 @@ Node.js file upload application for Azure training
 
 This template creates a storage account, web app services plan, web app and deploys the File Uploader application code from GitHub. 
 
-![Diagram](/Images/Web App - File Uploader .jpg)
+[![Diagram](/Images/Web App - File Uploader .jpg)]
+
