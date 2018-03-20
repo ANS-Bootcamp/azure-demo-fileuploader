@@ -87,7 +87,7 @@
                 "properties": {
                   "WEBSITE_NODE_DEFAULT_VERSION": "6.9.1",
                   "AZURE_STORAGE_ACCOUNT": "[variables('storageAccountName')]",
-                  "AZURE_STORAGE_ACCESS_KEY": "[listKeys(variables('storageAccountName'), '2016-12-01').keys[0].value]"
+                  "AZURE_STORAGE_ACCESS_KEY": "[listKeys(variables('storageAccountName'), '2016-12-01').key1]"
                 }
               }
         ],
@@ -107,11 +107,11 @@
         },
         "storageAccountConnection": {
             "type": "string",
-            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=', listKeys(variables('storageAccountName'), '2016-12-01').keys[0].value,';EndpointSuffix=core.windows.net')]"
+            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=', listKeys(variables('storageAccountName'), '2016-12-01').key1,';EndpointSuffix=core.windows.net')]"
         },
         "siteUri": {
             "type": "string",
-            "value": "[reference(concat('Microsoft.Web/sites/', variables('webSiteName'))).hostnames[0]]"
+            "value": "[concat('https://', reference(concat('Microsoft.Web/sites/', variables('webSiteName'))).hostnames[0])]"
         }
     }
   }
