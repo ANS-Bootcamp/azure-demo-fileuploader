@@ -41,14 +41,19 @@ app.post('/upload', function (req, res) {
           var options = {contentSettings:{contentType:contentType}}
   
           name = uuidv1() + "." + extension;
-  
-          blobService.createBlockBlobFromStream(api, name, part, size, options, function(error, result, response) {
-              if (error) {
-                  console.log("Blob Error");
-                  console.log(error);
-                  res.send(error);
-              };
-          });
+
+          //Creates container if not exists
+          blobService.createContainerIfNotExists(api, {publicAccessLevel : 'blob'}, function(error) {
+            if(!error) {
+                blobService.createBlockBlobFromStream(api, name, part, size, options, function(error, result, response) {
+                    if (error) {
+                        console.log("Blob Error");
+                        console.log(error);
+                        res.send(error);
+                    };
+                });
+            }
+          }); 
       };
     });
   
