@@ -81,7 +81,7 @@ $('#upload-input').on('change', function(){
             $('#modal-header').html('<h4>Image uploaded for "Computer Vision" text processing...</h4>');
           };
           var myModal = $(this);
-          setTimeout(function(){ $('#myModal').modal('hide'); }, 3000);
+          setTimeout(function(){ $('#myModal').modal('hide'); }, 10000);
       },
 
       xhr: function() {
