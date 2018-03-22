@@ -79,7 +79,12 @@ $('#upload-input').on('change', function(){
             document.getElementById("modal-title").innerHTML = "Text Recognition";
             $('#modal-body').html('<img src="' + data + '" id="imagepreview" style="width: 75%" >');
             $('#modal-header').html('<h4>Image uploaded for "Computer Vision" text processing...</h4>');
-          }
+          };
+          var myModal = $(this);
+          clearTimeout(myModal.data('hideInterval'));
+          myModal.data('hideInterval', setTimeout(function(){
+              myModal.modal('hide');
+          }, 3000))
       },
 
       xhr: function() {
